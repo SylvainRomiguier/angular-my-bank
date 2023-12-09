@@ -13,13 +13,13 @@ export class LocalStorageCustomerService implements CustomerService {
           customer.customerId,
           customer.firstName,
           customer.lastName,
-          customer.email,
           this.addressDtoToCustomerAddress(
             customer.address.street,
             customer.address.town,
             customer.address.zipcode
           ),
           customer.phoneNumber,
+          customer.email,
           new Date(customer.dateOfBirth)
         );
       });
@@ -47,7 +47,7 @@ export class LocalStorageCustomerService implements CustomerService {
 
   // Create a new customer
   createCustomer(
-    customerId: string,
+    customerId: string | null,
     firstName: string,
     lastName: string,
     address: string,
@@ -56,7 +56,7 @@ export class LocalStorageCustomerService implements CustomerService {
     dateOfBirth: Date
   ): void {
     const newCustomer: Customer = {
-      customerId,
+      customerId: customerId ?? this.generateCustomerId(),
       firstName,
       lastName,
       email,
@@ -67,7 +67,7 @@ export class LocalStorageCustomerService implements CustomerService {
     };
 
     const customers = this.customers();
-    const existingCustomer = this.getCustomerById(customerId);
+    const existingCustomer = this.getCustomerById(newCustomer.customerId);
     if (!existingCustomer) {
       customers.push(newCustomer);
       this.customers.set(customers);
@@ -130,5 +130,10 @@ export class LocalStorageCustomerService implements CustomerService {
     zipcode: string
   ): string {
     return `${street} - ${zipcode} ${town}`;
+  }
+
+   // Generate a unique customer ID (simple example)
+   private generateCustomerId(): string {
+    return `${Math.random().toString(36).substring(2, 9)}`;
   }
 }

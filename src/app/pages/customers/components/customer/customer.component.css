@@ -1,7 +1,8 @@
-.customer {
-  
-}
-
 .nowrap {
   white-space: nowrap;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
 }

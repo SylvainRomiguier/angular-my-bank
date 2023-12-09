@@ -18,7 +18,7 @@ export abstract class CustomerService {
 
   // Create a new customer
   abstract createCustomer(
-    customerId: string,
+    customerId: string | null,
     firstName: string,
     lastName: string,
     email: string,

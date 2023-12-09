@@ -3,7 +3,7 @@
     <div class="customers-list">
       <div *ngFor="let customer of this.customers()" class="hover-select">
         <a [routerLink]="['/customers', customer.customerId]">
-          <app-customer [customer]="customer"></app-customer>
+          <app-customer [customer]="customer" [small]="true"></app-customer>
         </a>
       </div>
     </div>

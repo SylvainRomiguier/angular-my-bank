@@ -1,15 +1,15 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CustomerService } from "src/app/services/Customer.abstract";
 import { CustomerComponent } from "../components/customer/customer.component";
-import { Customer } from "src/app/models";
+import { CustomerFormComponent } from "../components/customer-form/customer-form.component";
 
 @Component({
     selector: 'app-customer-page',
     standalone: true,
     templateUrl: `./customer.page.html`,
     styles: [''],
-    imports: [CustomerComponent]
+    imports: [CustomerComponent, CustomerFormComponent]
 })
 
 export class CustomerPageComponent {

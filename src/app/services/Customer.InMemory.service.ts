@@ -82,7 +82,7 @@ export class InMemoryCustomerService implements CustomerService {
 
   // Create a new customer
   createCustomer(
-    customerId: string,
+    customerId: string | null,
     firstName: string,
     lastName: string,
     address: string,
@@ -91,7 +91,7 @@ export class InMemoryCustomerService implements CustomerService {
     dateOfBirth: Date
   ): void {
     const newCustomer: Customer = {
-      customerId,
+      customerId: customerId ?? this.generateCustomerId(),
       firstName,
       lastName,
       email,
@@ -150,5 +150,10 @@ export class InMemoryCustomerService implements CustomerService {
     } else {
       console.error('Customer not found');
     }
+  }
+
+   // Generate a unique customer ID (simple example)
+   private generateCustomerId(): string {
+    return `${Math.random().toString(36).substring(2, 9)}`;
   }
 }
