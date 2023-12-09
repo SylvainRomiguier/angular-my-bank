@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   template: `
   <main class='container'>
-    <span class='header'><h1>Banking App</h1></span>
+    <span class='header'><h1>My Bank Ltd</h1></span>
     <router-outlet></router-outlet>
   </main>`,
     styles: ['.header { display: flex; justify-content: center; }'],

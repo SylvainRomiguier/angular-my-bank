@@ -1,0 +1,16 @@
+.customers-list {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hover-select:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+}

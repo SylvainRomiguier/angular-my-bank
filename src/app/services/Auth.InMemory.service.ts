@@ -5,7 +5,7 @@ import { AuthService } from './Auth.abstract';
 export class InMemoryAuthService implements AuthService {
   private username = 'admin';
   private password = 'password';
-  private authenticated = false;
+  private authenticated = true;
   private router = inject(Router);
   isAuthenticated() {
     if (!this.authenticated) {

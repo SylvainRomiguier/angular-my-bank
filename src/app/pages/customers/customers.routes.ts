@@ -5,10 +5,10 @@ export const customersRoutes: Route[] = [
         path: '',
         loadComponent: () => import('./customers.page').then(m => m.CustomerPageComponent),
     },
-    // {
-    //     path: ':customerId',
-    //     component: CustomerDetailsComponent
-    // },
+    {
+        path: ':customerId',
+        loadComponent: () => import('./customer/customer.page').then(m => m.CustomerPageComponent),
+    },
     // {
     //     path: ':customerId/accounts/:accountId',
     //     component: AccountDetailsComponent

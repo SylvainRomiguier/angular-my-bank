@@ -1,64 +1,29 @@
 import { WritableSignal, signal } from '@angular/core';
 import { Account, Customer } from '../models';
 import { CustomerService } from './Customer.abstract';
+import customersSample from './customers.sample.json';
 
-export class InMemoryCustomerService implements CustomerService {
+export class LocalStorageCustomerService implements CustomerService {
   private customers: WritableSignal<Customer[]> = signal([]);
 
   constructor() {
-    this.createCustomer(
-      'user-1',
-      'John',
-      'Doe',
-      'john.doe@some-company.com',
-      '1, rue de la Paix - 75000 Paris',
-      '01 23 45 67 89',
-      new Date(1980, 1, 1)
-    );
-    this.createCustomer(
-      'user-2',
-      'Jane',
-      'Doe',
-      'jane.doe@other-company.fr',
-      '2, rue de la Paix - 75000 Paris',
-      '01 23 45 67 89',
-      new Date(1985, 1, 1)
-    );
-    this.createCustomer(
-      'user-3',
-      'Sylvain',
-      'Romiguier',
-      'sylvain.romiguier@gmail.com',
-      '113, impasse des oliviers - 30980 Langlade',
-      '06 24 43 13 06',
-      new Date(1970, 4, 4)
-    );
-
-    this.addAccountToCustomer('user-1', {
-      accountId: 'account-1',
-      customerId: 'user-1',
-      name: 'John Doe account',
-      accountType: 'Checking',
-      balance: 100,
-      transactions: [],
-    });
-
-    this.addAccountToCustomer('user-2', {
-      accountId: 'account-2',
-      customerId: 'user-2',
-      name: 'Jane Doe account',
-      accountType: 'Checking',
-      balance: 200,
-      transactions: [],
-    });
-    this.addAccountToCustomer('user-3', {
-      accountId: 'account-3',
-      customerId: 'user-3',
-      name: 'Sylvain Romiguier account',
-      accountType: 'Checking',
-      balance: 300,
-      transactions: [],
-    });
+    if (this.customers().length === 0) {
+      customersSample.forEach((customer) => {
+        this.createCustomer(
+          customer.customerId,
+          customer.firstName,
+          customer.lastName,
+          customer.email,
+          this.addressDtoToCustomerAddress(
+            customer.address.street,
+            customer.address.town,
+            customer.address.zipcode
+          ),
+          customer.phoneNumber,
+          new Date(customer.dateOfBirth)
+        );
+      });
+    }
   }
 
   // Get all customers
@@ -102,8 +67,12 @@ export class InMemoryCustomerService implements CustomerService {
     };
 
     const customers = this.customers();
-    customers.push(newCustomer);
-    this.customers.set(customers);
+    const existingCustomer = this.getCustomerById(customerId);
+    if (!existingCustomer) {
+      customers.push(newCustomer);
+      this.customers.set(customers);
+      localStorage.setItem('customers', JSON.stringify(customers));
+    }
   }
 
   // Remove a customer (if needed)
@@ -112,6 +81,7 @@ export class InMemoryCustomerService implements CustomerService {
       (customer) => customer.customerId !== customerId
     );
     this.customers.set(customers);
+    localStorage.setItem('customers', JSON.stringify(customers));
   }
 
   // Update a customer
@@ -123,6 +93,7 @@ export class InMemoryCustomerService implements CustomerService {
     if (customerIndex >= 0) {
       customers[customerIndex] = customer;
       this.customers.set(customers);
+      localStorage.setItem('customers', JSON.stringify(customers));
     } else {
       console.error('Customer not found');
     }
@@ -150,5 +121,14 @@ export class InMemoryCustomerService implements CustomerService {
     } else {
       console.error('Customer not found');
     }
+  }
+
+  // example of a DTO (Data Transfer Object) conversion
+  private addressDtoToCustomerAddress(
+    street: string,
+    town: string,
+    zipcode: string
+  ): string {
+    return `${street} - ${zipcode} ${town}`;
   }
 }

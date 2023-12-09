@@ -1,27 +1,11 @@
 <div>
-    <h2>Customer List</h2>
-    <ul>
-      <li *ngFor="let customer of this.customers()">
-        <div>
-          <strong>Customer ID:</strong> {{ customer.customerId }}
-        </div>
-        <div>
-          <strong>Name:</strong> {{customer.firstName }} {{ customer.lastName }}
-        </div>
-        <div><strong>Email:</strong> {{ customer.email }}</div>
-        <div><strong>Date of Birth:</strong> {{ customer.dateOfBirth | date }}</div>
-        <!-- You can display other customer information here -->
-  
-        <!-- Displaying accounts for the customer -->
-        <div *ngIf="customer.accounts.length > 0">
-          <strong>Accounts:</strong>
-          <ul>
-            <li *ngFor="let account of customer.accounts">
-              {{ account.accountType }} Account (ID: {{ account.accountId }}) - Balance: {{ account.balance | currency }}
-            </li>
-          </ul>
-        </div>
-      </li>
-    </ul>
+    <h2>Customers</h2>
+    <div class="customers-list">
+      <div *ngFor="let customer of this.customers()" class="hover-select">
+        <a [routerLink]="['/customers', customer.customerId]">
+          <app-customer [customer]="customer"></app-customer>
+        </a>
+      </div>
+    </div>
   </div>
   

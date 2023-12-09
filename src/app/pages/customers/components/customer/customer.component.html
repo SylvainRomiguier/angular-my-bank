@@ -1,0 +1,15 @@
+<article *ngIf="customer !== undefined" class="customer">
+    <header>
+        <div class="nowrap">
+           Customer ID: <strong>{{ customer.customerId }}</strong> 
+          </div>
+          <div class="nowrap">
+            Name: <strong>{{customer.firstName }} {{ customer.lastName }}</strong>
+          </div>
+          <div class="nowrap">Email: <strong>{{ customer.email }}</strong></div>
+          <div class="nowrap">Date of Birth: <strong>{{ customer.dateOfBirth | date }}</strong></div>
+    </header>
+    <div>
+        Total balance: <strong>{{ totalBalance() | currency}}</strong>
+    </div>
+</article>

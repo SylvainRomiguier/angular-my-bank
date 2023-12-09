@@ -1,0 +1,143 @@
+[
+    {
+      "customerId": "1",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "dateOfBirth": "1990-01-01",
+      "address": {
+        "street": "123 Main St",
+        "town": "Anytown",
+        "zipcode": "12345"
+      },
+      "phoneNumber": "123-456-7890",
+      "accounts": []
+    },
+    {
+      "customerId": "2",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith@example.com",
+      "dateOfBirth": "1985-05-15",
+      "address": {
+        "street": "456 Oak Ave",
+        "town": "Sometown",
+        "zipcode": "54321"
+      },
+      "phoneNumber": "987-654-3210",
+      "accounts": []
+    },
+    {
+      "customerId": "3",
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "email": "alice.johnson@example.com",
+      "dateOfBirth": "1988-09-20",
+      "address": {
+        "street": "789 Elm Blvd",
+        "town": "Othertown",
+        "zipcode": "67890"
+      },
+      "phoneNumber": "555-123-4567",
+      "accounts": []
+    },
+    {
+      "customerId": "4",
+      "firstName": "Bob",
+      "lastName": "Williams",
+      "email": "bob.williams@example.com",
+      "dateOfBirth": "1992-03-10",
+      "address": {
+        "street": "567 Pine Ln",
+        "town": "Newtown",
+        "zipcode": "45678"
+      },
+      "phoneNumber": "333-555-7777",
+      "accounts": []
+    },
+    {
+      "customerId": "5",
+      "firstName": "Eva",
+      "lastName": "Anderson",
+      "email": "eva.anderson@example.com",
+      "dateOfBirth": "1980-12-05",
+      "address": {
+        "street": "890 Cedar Rd",
+        "town": "Cityville",
+        "zipcode": "34567"
+      },
+      "phoneNumber": "111-222-3333",
+      "accounts": []
+    },
+    {
+      "customerId": "6",
+      "firstName": "David",
+      "lastName": "Miller",
+      "email": "david.miller@example.com",
+      "dateOfBirth": "1995-07-18",
+      "address": {
+        "street": "234 Birch Ct",
+        "town": "Smalltown",
+        "zipcode": "23456"
+      },
+      "phoneNumber": "999-888-7777",
+      "accounts": []
+    },
+    {
+      "customerId": "7",
+      "firstName": "Grace",
+      "lastName": "Brown",
+      "email": "grace.brown@example.com",
+      "dateOfBirth": "1983-04-30",
+      "address": {
+        "street": "678 Maple Dr",
+        "town": "Hometown",
+        "zipcode": "56789"
+      },
+      "phoneNumber": "777-888-9999",
+      "accounts": []
+    },
+    {
+      "customerId": "8",
+      "firstName": "Charlie",
+      "lastName": "Taylor",
+      "email": "charlie.taylor@example.com",
+      "dateOfBirth": "1998-11-12",
+      "address": {
+        "street": "345 Walnut Ave",
+        "town": "Villagetown",
+        "zipcode": "67891"
+      },
+      "phoneNumber": "222-333-4444",
+      "accounts": []
+    },
+    {
+      "customerId": "9",
+      "firstName": "Sophia",
+      "lastName": "Lee",
+      "email": "sophia.lee@example.com",
+      "dateOfBirth": "1987-06-25",
+      "address": {
+        "street": "456 Spruce Rd",
+        "town": "Countryville",
+        "zipcode": "78901"
+      },
+      "phoneNumber": "444-555-6666",
+      "accounts": []
+    },
+    {
+      "customerId": "10",
+      "firstName": "Mason",
+      "lastName": "Garcia",
+      "email": "mason.garcia@example.com",
+      "dateOfBirth": "1994-02-14",
+      "address": {
+        "street": "789 Fir Ln",
+        "town": "Seasidetown",
+        "zipcode": "89012"
+      },
+      "phoneNumber": "666-777-8888",
+      "accounts": []
+    }
+  ]
+  
