@@ -1,10 +1,10 @@
 // customer-list.component.ts
 
 import { Component, inject } from '@angular/core';
-import { CustomerService } from '../../../services/Customer.abstract';
+import { CustomerService } from '../../../../services/Customer.abstract';
 import { Customer } from 'src/app/models';
 import { CurrencyPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
-import { CustomerComponent } from '../components/customer/customer.component';
+import { CustomerComponent } from '../customer/customer.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
