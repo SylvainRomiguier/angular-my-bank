@@ -1,9 +1,11 @@
+import { AccountType } from "./AccountType";
 import { Transaction } from "./Transaction";
 
 export interface Account {
     accountId: string;
     customerId: string;
-    accountType: 'Savings' | 'Checking' | 'Business';
+    name: string;
+    accountType: AccountType;
     balance: number;
     transactions: Transaction[];
 }

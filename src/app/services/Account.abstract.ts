@@ -17,7 +17,7 @@ export abstract class AccountService {
   abstract getAccountsForCustomer(customerId: string): Account[];
 
   // Create a new account
-  abstract createAccount(customer: Customer, accountType: AccountType): void;
+  abstract createAccount(customer: Customer, name: string, accountType: AccountType): void;
 
   // Remove an account (if needed)
   abstract removeAccount(accountId: string): void; 

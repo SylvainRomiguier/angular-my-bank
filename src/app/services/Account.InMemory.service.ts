@@ -1,11 +1,11 @@
+import { inject } from '@angular/core';
 import { Account, AccountType, Customer, TransactionType } from '../models';
 import { AccountService } from './Account.abstract';
 import { TransactionService } from './Transaction.abstract';
 
 export class InMemoryAccountService implements AccountService {
   private accounts: Account[] = [];
-
-  constructor(private transactionService: TransactionService) {}
+  private transactionService = inject(TransactionService);
 
   // Get all accounts
   getAccounts(): Account[] {
@@ -23,10 +23,11 @@ export class InMemoryAccountService implements AccountService {
   }
 
   // Create a new account
-  createAccount(customer: Customer, accountType: AccountType): void {
+  createAccount(customer: Customer, name:string, accountType: AccountType): void {
     const newAccount: Account = {
       accountId: this.generateAccountId(),
       customerId: customer.customerId,
+      name,
       accountType,
       balance: 0,
       transactions: [],
