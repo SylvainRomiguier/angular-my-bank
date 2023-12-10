@@ -6,59 +6,7 @@ export class InMemoryCustomerService implements CustomerService {
   private customers: WritableSignal<Customer[]> = signal([]);
 
   constructor() {
-    this.createCustomer(
-      'user-1',
-      'John',
-      'Doe',
-      'john.doe@some-company.com',
-      '1, rue de la Paix - 75000 Paris',
-      '01 23 45 67 89',
-      new Date(1980, 1, 1)
-    );
-    this.createCustomer(
-      'user-2',
-      'Jane',
-      'Doe',
-      'jane.doe@other-company.fr',
-      '2, rue de la Paix - 75000 Paris',
-      '01 23 45 67 89',
-      new Date(1985, 1, 1)
-    );
-    this.createCustomer(
-      'user-3',
-      'Sylvain',
-      'Romiguier',
-      'sylvain.romiguier@gmail.com',
-      '113, impasse des oliviers - 30980 Langlade',
-      '06 24 43 13 06',
-      new Date(1970, 4, 4)
-    );
-
-    this.addAccountToCustomer('user-1', {
-      accountId: 'account-1',
-      customerId: 'user-1',
-      name: 'John Doe account',
-      accountType: 'Checking',
-      balance: 100,
-      transactions: [],
-    });
-
-    this.addAccountToCustomer('user-2', {
-      accountId: 'account-2',
-      customerId: 'user-2',
-      name: 'Jane Doe account',
-      accountType: 'Checking',
-      balance: 200,
-      transactions: [],
-    });
-    this.addAccountToCustomer('user-3', {
-      accountId: 'account-3',
-      customerId: 'user-3',
-      name: 'Sylvain Romiguier account',
-      accountType: 'Checking',
-      balance: 300,
-      transactions: [],
-    });
+    this.loadCustomers();
   }
 
   // Get all customers
@@ -90,7 +38,7 @@ export class InMemoryCustomerService implements CustomerService {
     email: string,
     dateOfBirth: Date
   ): void {
-    const newCustomer: Customer = {
+    const newCustomer:Customer = {
       customerId: customerId ?? this.generateCustomerId(),
       firstName,
       lastName,
@@ -152,8 +100,64 @@ export class InMemoryCustomerService implements CustomerService {
     }
   }
 
-   // Generate a unique customer ID (simple example)
-   private generateCustomerId(): string {
+  loadCustomers(): void {
+    this.createCustomer(
+      'user-1',
+      'John',
+      'Doe',
+      'john.doe@some-company.com',
+      '1, rue de la Paix - 75000 Paris',
+      '01 23 45 67 89',
+      new Date(1980, 1, 1)
+    );
+    this.createCustomer(
+      'user-2',
+      'Jane',
+      'Doe',
+      'jane.doe@other-company.fr',
+      '2, rue de la Paix - 75000 Paris',
+      '01 23 45 67 89',
+      new Date(1985, 1, 1)
+    );
+    this.createCustomer(
+      'user-3',
+      'Sylvain',
+      'Romiguier',
+      'sylvain.romiguier@gmail.com',
+      '113, impasse des oliviers - 30980 Langlade',
+      '06 24 43 13 06',
+      new Date(1970, 4, 4)
+    );
+
+    this.addAccountToCustomer('user-1', {
+      accountId: 'account-1',
+      customerId: 'user-1',
+      name: 'John Doe account',
+      accountType: 'Checking',
+      balance: 100,
+      transactions: [],
+    });
+
+    this.addAccountToCustomer('user-2', {
+      accountId: 'account-2',
+      customerId: 'user-2',
+      name: 'Jane Doe account',
+      accountType: 'Checking',
+      balance: 200,
+      transactions: [],
+    });
+    this.addAccountToCustomer('user-3', {
+      accountId: 'account-3',
+      customerId: 'user-3',
+      name: 'Sylvain Romiguier account',
+      accountType: 'Checking',
+      balance: 300,
+      transactions: [],
+    });
+  }
+
+  // Generate a unique customer ID (simple example)
+  private generateCustomerId(): string {
     return `${Math.random().toString(36).substring(2, 9)}`;
   }
 }

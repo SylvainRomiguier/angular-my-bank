@@ -1,5 +1,12 @@
 // customer-form.component.ts
-import { Component, Input, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Customer } from '../../../../models';
 import { LabelValueComponent } from 'src/app/components/atoms/label-value.component';
@@ -13,36 +20,32 @@ import { LabelValueComponent } from 'src/app/components/atoms/label-value.compon
 })
 export class CustomerFormComponent implements OnInit {
   @Input() customer?: Customer;
+  @Output() onSubmit = new EventEmitter<Customer>();
   private fb = inject(FormBuilder);
   customerForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    dateOfBirth: ['', Validators.required],
-    address: ['', Validators.required] ,
-    phoneNumber: [''],
+    dateOfBirth: [new Date().toString().split('T')[0], Validators.required],
+    address: ['', Validators.required],
+    phoneNumber: ['', Validators.required],
   });
 
-  
-
   ngOnInit(): void {
-    if (this.customer) {
-      this.customerForm.patchValue({...this.customer, dateOfBirth: this.customer.dateOfBirth.toString()});
+    if (!this.customer) {
+      return;
     }
+    this.customerForm.patchValue({...this.customer, dateOfBirth: this.customer.dateOfBirth.toString().split('T')[0]});
   }
 
-  onSubmit(): void {
-    // Handle form submission here (add/update customer)
-    const formData = this.customerForm.value;
-    if (this.customer) {
-      // Update existing customer
-      // Implement update logic
-      console.log('Update customer:', formData);
-    } else {
-      // Add new customer
-      // Implement add logic
-      console.log('Add new customer:', formData);
+  submit() {
+    if (this.customerForm.valid) {
+      this.onSubmit.emit({
+        ...(this.customerForm.value as unknown as Customer),
+        dateOfBirth: new Date(this.customerForm.value.dateOfBirth!),
+        customerId: this.customer!.customerId,
+        accounts: this.customer!.accounts,
+      });
     }
   }
 }
-

@@ -7,23 +7,29 @@ export class LocalStorageCustomerService implements CustomerService {
   private customers: WritableSignal<Customer[]> = signal([]);
 
   constructor() {
-    if (this.customers().length === 0) {
-      customersSample.forEach((customer) => {
-        this.createCustomer(
-          customer.customerId,
-          customer.firstName,
-          customer.lastName,
-          this.addressDtoToCustomerAddress(
-            customer.address.street,
-            customer.address.town,
-            customer.address.zipcode
-          ),
-          customer.phoneNumber,
-          customer.email,
-          new Date(customer.dateOfBirth)
-        );
-      });
+    if (localStorage.getItem('customers')) {
+      this.customers.set(JSON.parse(localStorage.getItem('customers') ?? '[]'));
+    } else {
+      this.loadCustomers();
     }
+  }
+
+  loadCustomers(): void {
+    customersSample.forEach((customer) => {
+      this.createCustomer(
+        customer.customerId,
+        customer.firstName,
+        customer.lastName,
+        this.addressDtoToCustomerAddress(
+          customer.address.street,
+          customer.address.town,
+          customer.address.zipcode
+        ),
+        customer.phoneNumber,
+        customer.email,
+        new Date(customer.dateOfBirth)
+      );
+    });
   }
 
   // Get all customers
@@ -132,8 +138,8 @@ export class LocalStorageCustomerService implements CustomerService {
     return `${street} - ${zipcode} ${town}`;
   }
 
-   // Generate a unique customer ID (simple example)
-   private generateCustomerId(): string {
+  // Generate a unique customer ID (simple example)
+  private generateCustomerId(): string {
     return `${Math.random().toString(36).substring(2, 9)}`;
   }
 }

@@ -27,6 +27,9 @@ export abstract class CustomerService {
     dateOfBirth: Date
   ): void;
 
+  // Update a customer
+  abstract updateCustomer(customer: Customer): void;
+
   // Remove a customer (if needed)
   abstract removeCustomer(customerId: string): void;
 
@@ -38,4 +41,6 @@ export abstract class CustomerService {
     customerId: string,
     accountId: string
   ): void;
+
+  abstract loadCustomers(): void;
 }

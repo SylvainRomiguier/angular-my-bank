@@ -1,5 +1,5 @@
 <article>
-<form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="customerForm" (ngSubmit)="submit()">
     <app-label-value label="Customer ID" [value]="customer?.customerId || 'new customer ID will be automatically generated'"></app-label-value>
     <label for="firstName">First Name:</label>
     <input type="text" id="firstName" formControlName="firstName" />

@@ -1,18 +1,39 @@
-<article *ngIf="customer !== undefined" class="customer">
-    <header>
-        <div class="main">
-            <app-label-value label="Customer ID" [value]="customer.customerId"></app-label-value>
-            <app-label-value label="Name" [value]="customer.firstName + ' ' + customer.lastName"></app-label-value>
-            <app-label-value label="Phone number" [value]="customer.phoneNumber"></app-label-value>
-            <app-label-value label="Email" [value]="customer.email"></app-label-value>
-        </div>
-        <div class="customer-details" *ngIf="!small">
-            <app-label-value label="Date of Birth" [value]="(customer.dateOfBirth | date: 'dd-MM-yyyy') || 'n/a'"></app-label-value>
-            <app-label-value label="Address" [value]="customer.address"></app-label-value>
-            <app-label-value label="# of accounts" [value]="accountCount().toString()"></app-label-value>
-        </div>
-    </header>
-    <div>
-        Total balance: <strong>{{ totalBalance() | currency}}</strong>
+<article *ngIf="customer" class="customer">
+  <header>
+    <div class="main">
+      <app-label-value
+        label="Customer ID"
+        [value]="customer.customerId"
+      ></app-label-value>
+      <app-label-value
+        label="Name"
+        [value]="customer.firstName + ' ' + customer.lastName"
+      ></app-label-value>
+      <app-label-value
+        label="Phone number"
+        [value]="customer.phoneNumber"
+      ></app-label-value>
+      <app-label-value label="Email" [value]="customer.email"></app-label-value>
     </div>
+    <div class="customer-details" *ngIf="!small">
+      <app-label-value
+        label="Date of Birth"
+        [value]="(customer.dateOfBirth | date : 'dd-MM-yyyy') || 'n/a'"
+      ></app-label-value>
+      <app-label-value
+        label="Address"
+        [value]="customer.address"
+      ></app-label-value>
+      <app-label-value
+        label="# of accounts"
+        [value]="accountCount().toString()"
+      ></app-label-value>
+    </div>
+  </header>
+  <div>
+    Total balance: <strong>{{ totalBalance() | currency }}</strong>
+  </div>
+  <footer *ngIf="small">
+    <app-button-danger [width]="'100px'" (click)="deleteCustomer($event)"><i class="fa-regular fa-trash-can"></i></app-button-danger>
+  </footer>
 </article>

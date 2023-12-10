@@ -14,5 +14,6 @@ import { RouterLink } from '@angular/router';
   imports: [DatePipe, CurrencyPipe, NgForOf, NgIf, CustomerComponent, RouterLink],
 })
 export class CustomerListComponent {
-  customers = inject(CustomerService).getCustomers();
+  customerService = inject(CustomerService);
+  customers = this.customerService.getCustomers();
 }

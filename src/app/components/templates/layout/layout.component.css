@@ -1,0 +1,10 @@
+h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.container {
+    min-height: 100vh;
+}

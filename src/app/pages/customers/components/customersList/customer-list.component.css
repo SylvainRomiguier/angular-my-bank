@@ -1,8 +1,11 @@
 .customers-list {
-    display: flex;
-    gap: 1rem;
+    display: flex;  
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 1rem;
+}
+
+.customers-list > * {
+   flex: 1 1 33%;
 }
 
 a {
@@ -14,3 +17,17 @@ a {
     transition: all 0.2s ease-in-out;
     transform: scale(1.1);
 }
+
+.fa-user {
+    margin-right: 1rem;
+}
+
+h2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    flex: 1 1 300%;
+}
+

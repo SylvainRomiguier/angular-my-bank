@@ -8,4 +8,5 @@ import { InMemoryAuthService } from "./Auth.InMemory.service";
 export abstract class AuthService {
   abstract isAuthenticated(): boolean;
   abstract authenticate(username: string, password: string): boolean;
+  abstract logout(): void;
 }

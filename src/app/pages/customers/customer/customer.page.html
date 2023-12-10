@@ -1,3 +1,3 @@
-<h2>Customer</h2>
-<app-customer [customer]="customer"></app-customer>
-<app-customer-form [customer]="customer"></app-customer-form>
+<h2><span class="title"><i class="fa-regular fa-user" style="margin-right: 1rem;"></i>Customer</span><button (click)="onEdit()">Edit</button></h2>
+<app-customer *ngIf="!edit" [customer]="customer"></app-customer>
+<app-customer-form *ngIf="edit" [customer]="customer" (onSubmit)="onSaveCustomer($event)"></app-customer-form>

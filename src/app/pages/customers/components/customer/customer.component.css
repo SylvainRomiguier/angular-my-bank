@@ -2,7 +2,16 @@
   white-space: nowrap;
 }
 
+article {
+  margin: 0;
+}
+
 header {
     display: flex;
     justify-content: space-between;
+}
+
+footer {
+    display: flex;
+    justify-content: end;
 }

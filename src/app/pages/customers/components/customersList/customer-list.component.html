@@ -1,5 +1,5 @@
 <div>
-    <h2>Customers</h2>
+  <h2><span class="title"><i class="fa-regular fa-user"></i>Customers ({{ this.customers().length}})</span><button (click)="customerService.loadCustomers()">Reload default customers</button></h2>
     <div class="customers-list">
       <div *ngFor="let customer of this.customers()" class="hover-select">
         <a [routerLink]="['/customers', customer.customerId]">

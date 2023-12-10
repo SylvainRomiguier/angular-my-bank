@@ -8,4 +8,4 @@ import { CustomerListComponent } from "./components/customersList/customer-list.
     styles: [''],
     imports: [CustomerListComponent]
 })
-export class CustomerPageComponent {}
+export class CustomersPageComponent {}
