@@ -26,7 +26,7 @@ export class CustomerFormComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    dateOfBirth: [new Date().toString().split('T')[0], Validators.required],
+    dateOfBirth: [new Date().toISOString().split('T')[0], Validators.required],
     address: ['', Validators.required],
     phoneNumber: ['', Validators.required],
   });
@@ -35,7 +35,7 @@ export class CustomerFormComponent implements OnInit {
     if (!this.customer) {
       return;
     }
-    this.customerForm.patchValue({...this.customer, dateOfBirth: this.customer.dateOfBirth.toString().split('T')[0]});
+    this.customerForm.patchValue({...this.customer, dateOfBirth: new Date(this.customer.dateOfBirth).toISOString().split('T')[0]});
   }
 
   submit() {

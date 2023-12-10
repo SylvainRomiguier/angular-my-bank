@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { CustomerService } from "src/app/services/Customer.abstract";
 import { CustomerComponent } from "../components/customer/customer.component";
 import { CustomerFormComponent } from "../components/customer-form/customer-form.component";
@@ -11,7 +11,7 @@ import { NgIf } from "@angular/common";
     standalone: true,
     templateUrl: `./customer.page.html`,
     styleUrls: ['./customer.page.css'],
-    imports: [CustomerComponent, CustomerFormComponent, NgIf]
+    imports: [CustomerComponent, CustomerFormComponent, NgIf, RouterLink]
 })
 
 export class CustomerPageComponent implements OnInit {
