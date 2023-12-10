@@ -15,6 +15,7 @@ export class LocalStorageCustomerService implements CustomerService {
   }
 
   loadCustomers(): void {
+    this.customers.set([]);
     customersSample.forEach((customer) => {
       this.createCustomer(
         customer.customerId,
