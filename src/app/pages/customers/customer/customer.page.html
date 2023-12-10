@@ -1,4 +1,12 @@
 <a routerLink="/customers">< Customers</a>
-<h2><span class="title"><i class="fa-regular fa-user" style="margin-right: 1rem;"></i>Customer</span><button (click)="onEdit()">Edit</button></h2>
+<h2>
+  <span class="title"
+    ><i class="fa-regular fa-user" style="margin-right: 1rem"></i>Customer</span
+  ><button *ngIf="!edit" (click)="onEdit()">Edit</button>
+</h2>
 <app-customer *ngIf="!edit" [customer]="customer"></app-customer>
-<app-customer-form *ngIf="edit" [customer]="customer" (onSubmit)="onSaveCustomer($event)"></app-customer-form>
+<app-customer-form
+  *ngIf="edit"
+  [customer]="customer"
+  (onSubmit)="onSaveCustomer($event)"
+></app-customer-form>
