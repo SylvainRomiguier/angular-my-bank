@@ -1,0 +1,12 @@
+<form [formGroup]="accountForm" (ngSubmit)="submit()">
+    <app-label-value label="Account ID" [value]="account?.accountId || 'automatically generated'"></app-label-value>
+    <label for="name">name:</label>
+    <input type="text" id="name" formControlName="name" />
+  
+    <label for="accountType">Account Type:</label>
+    <select id="accountType" formControlName="accountType">
+      <option value="Savings">Savings</option>
+      <option value="Checking">Checking</option>
+      <option value="Business">Business</option>
+    </select>
+</form>

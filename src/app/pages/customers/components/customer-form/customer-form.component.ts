@@ -10,13 +10,14 @@ import {
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Customer } from '../../../../models';
 import { LabelValueComponent } from 'src/app/components/atoms/label-value.component';
+import { ButtonDangerComponent } from 'src/app/components/molecules/button-danger/button-danger.component';
 
 @Component({
   selector: 'app-customer-form',
   standalone: true,
   templateUrl: './customer-form.component.html',
   styleUrls: ['./customer-form.component.css'],
-  imports: [ReactiveFormsModule, LabelValueComponent],
+  imports: [ReactiveFormsModule, LabelValueComponent, ButtonDangerComponent],
 })
 export class CustomerFormComponent implements OnInit {
   @Input() customer?: Customer;
@@ -47,5 +48,9 @@ export class CustomerFormComponent implements OnInit {
         accounts: this.customer?.accounts ?? [],
       });
     }
+  }
+
+  onCancel() {
+    this.onSubmit.emit();
   }
 }

@@ -5,13 +5,14 @@ import { CustomerComponent } from "../components/customer/customer.component";
 import { CustomerFormComponent } from "../components/customer-form/customer-form.component";
 import { Customer } from "src/app/models";
 import { NgIf } from "@angular/common";
+import { AccountListComponent } from "./components/account-list/account-list.component";
 
 @Component({
     selector: 'app-customer-page',
     standalone: true,
     templateUrl: `./customer.page.html`,
     styleUrls: ['./customer.page.css'],
-    imports: [CustomerComponent, CustomerFormComponent, NgIf, RouterLink]
+    imports: [CustomerComponent, CustomerFormComponent, NgIf, RouterLink, AccountListComponent]
 })
 
 export class CustomerPageComponent implements OnInit {

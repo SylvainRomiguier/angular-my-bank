@@ -4,7 +4,7 @@
       ><i class="fa-regular fa-user"></i>Customers ({{
         this.customers().length
       }})</span
-    ><button *ngIf="!edit" (click)="onEdit()">Add customer</button
+    ><button *ngIf="!edit" (click)="onEdit()"><i class="fa-regular fa-add"></i></button
     ><button *ngIf="!edit" (click)="customerService.loadCustomers()">
       Reload default customers
     </button>

@@ -15,3 +15,7 @@ footer {
     display: flex;
     justify-content: end;
 }
+
+.customer-details {
+  margin-left: 1rem;
+}

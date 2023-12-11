@@ -17,3 +17,17 @@ a {
 a:hover {
     color: var(--primary-over);
 }
+
+.customer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+app-account-list {
+    flex: 1 1 39%;
+}
+
+app-customer-details {
+    flex: 1 1 60%;
+}
