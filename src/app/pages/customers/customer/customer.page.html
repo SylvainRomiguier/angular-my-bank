@@ -1,7 +1,7 @@
 <a routerLink="/customers">< Customers</a>
 <h2>
   <span class="title"
-    ><i class="fa-regular fa-user" style="margin-right: 1rem"></i>Customer</span
+    ><i class="fa-regular fa-user" style="margin-right: 1rem"></i>{{customer.firstName}} {{customer.lastName}}</span
   ><button *ngIf="!edit" (click)="onEdit()">Edit</button>
 </h2>
 <app-customer *ngIf="!edit" [customer]="customer"></app-customer>

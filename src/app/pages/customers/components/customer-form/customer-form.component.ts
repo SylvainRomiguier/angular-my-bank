@@ -43,8 +43,8 @@ export class CustomerFormComponent implements OnInit {
       this.onSubmit.emit({
         ...(this.customerForm.value as unknown as Customer),
         dateOfBirth: new Date(this.customerForm.value.dateOfBirth!),
-        customerId: this.customer!.customerId,
-        accounts: this.customer!.accounts,
+        customerId: this.customer?.customerId ?? "to_create",
+        accounts: this.customer?.accounts ?? [],
       });
     }
   }

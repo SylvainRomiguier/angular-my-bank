@@ -54,7 +54,7 @@ export class LocalStorageCustomerService implements CustomerService {
 
   // Create a new customer
   createCustomer(
-    customerId: string | null,
+    customerId: string,
     firstName: string,
     lastName: string,
     address: string,
@@ -63,7 +63,7 @@ export class LocalStorageCustomerService implements CustomerService {
     dateOfBirth: Date
   ): void {
     const newCustomer: Customer = {
-      customerId: customerId ?? this.generateCustomerId(),
+      customerId: customerId === "to_create" ? this.generateCustomerId() : customerId,
       firstName,
       lastName,
       email,
