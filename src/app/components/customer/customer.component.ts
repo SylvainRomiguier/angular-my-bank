@@ -5,8 +5,8 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { LabelValueComponent } from 'src/app/components/atoms/label-value.component';
-import { ButtonDangerComponent } from 'src/app/components/molecules/button-danger/button-danger.component';
+import { LabelValueComponent } from 'src/app/components/label-value.component';
+import { ButtonDangerComponent } from 'src/app/components/button-danger/button-danger.component';
 import { Customer } from 'src/app/models';
 
 @Component({

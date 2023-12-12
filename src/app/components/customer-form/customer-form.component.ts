@@ -8,9 +8,9 @@ import {
   inject,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Customer } from '../../../../models';
-import { LabelValueComponent } from 'src/app/components/atoms/label-value.component';
-import { ButtonDangerComponent } from 'src/app/components/molecules/button-danger/button-danger.component';
+import { Customer } from 'src/app/models';
+import { LabelValueComponent } from 'src/app/components/label-value.component';
+import { ButtonDangerComponent } from 'src/app/components/button-danger/button-danger.component';
 
 @Component({
   selector: 'app-customer-form',

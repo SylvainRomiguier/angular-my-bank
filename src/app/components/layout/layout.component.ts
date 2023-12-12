@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ButtonDangerComponent } from '../../molecules/button-danger/button-danger.component';
+import { ButtonDangerComponent } from 'src/app/components/button-danger/button-danger.component';
 import { AuthService } from 'src/app/services/Auth.abstract';
 import { NgIf } from '@angular/common';
 

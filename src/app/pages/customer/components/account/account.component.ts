@@ -1,6 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ButtonDangerComponent } from 'src/app/components/molecules/button-danger/button-danger.component';
+import { ButtonDangerComponent } from 'src/app/components/button-danger/button-danger.component';
 import { Account } from 'src/app/models';
 
 @Component({

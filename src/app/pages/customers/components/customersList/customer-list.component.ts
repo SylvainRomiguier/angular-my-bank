@@ -2,9 +2,9 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CurrencyPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
-import { CustomerComponent } from '../customer/customer.component';
+import { CustomerComponent } from 'src/app/components/customer/customer.component';
 import { RouterLink } from '@angular/router';
-import { CustomerFormComponent } from '../customer-form/customer-form.component';
+import { CustomerFormComponent } from 'src/app/components/customer-form/customer-form.component';
 import { Customer } from 'src/app/models';
 
 @Component({

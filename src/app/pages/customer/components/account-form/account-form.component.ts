@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LabelValueComponent } from 'src/app/components/atoms/label-value.component';
-import { ButtonDangerComponent } from 'src/app/components/molecules/button-danger/button-danger.component';
+import { LabelValueComponent } from 'src/app/components/label-value.component';
+import { ButtonDangerComponent } from 'src/app/components/button-danger/button-danger.component';
 import { Account } from 'src/app/models';
 
 @Component({

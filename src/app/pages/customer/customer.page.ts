@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CustomerService } from 'src/app/services/Customer.abstract';
-import { CustomerComponent } from '../components/customer/customer.component';
-import { CustomerFormComponent } from '../components/customer-form/customer-form.component';
+import { CustomerComponent } from 'src/app/components/customer/customer.component';
+import { CustomerFormComponent } from 'src/app/components/customer-form/customer-form.component';
 import { Account, Customer } from 'src/app/models';
 import { NgIf } from '@angular/common';
 import { AccountListComponent } from './components/account-list/account-list.component';
