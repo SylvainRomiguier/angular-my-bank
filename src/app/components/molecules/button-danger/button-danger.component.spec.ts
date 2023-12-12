@@ -7,9 +7,7 @@ describe('ButtonDangerComponent', () => {
   let fixture: ComponentFixture<ButtonDangerComponent>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [ButtonDangerComponent]
-    });
+    TestBed.configureTestingModule({});
     fixture = TestBed.createComponent(ButtonDangerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

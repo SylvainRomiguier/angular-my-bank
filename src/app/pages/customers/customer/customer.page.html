@@ -1,15 +1,21 @@
 <a routerLink="/customers">< Customers</a>
 <h2>
   <span class="title"
-    ><i class="fa-regular fa-user" style="margin-right: 1rem"></i>{{customer.firstName}} {{customer.lastName}}</span
+    ><i class="fa-regular fa-user" style="margin-right: 1rem"></i
+    >{{customer()!.firstName}} {{customer()!.lastName}}</span
   ><button *ngIf="!edit" (click)="onEdit()">Edit</button>
 </h2>
 <div *ngIf="!edit" class="customer-container">
-<app-customer [customer]="customer"></app-customer>
-<app-account-list [customerId]="customer.customerId" [accounts]="customer.accounts"></app-account-list>
+  <app-customer [customer]="customer()"></app-customer>
+  <app-account-list
+    [customerId]="customer()!.customerId"
+    [accounts]="customer()!.accounts"
+    (onAddAccount)="addAcount($event)"
+    (onDeleteAccount)="deleteAccount($event)"
+  ></app-account-list>
 </div>
 <app-customer-form
   *ngIf="edit"
-  [customer]="customer"
-  (onSubmit)="onSaveCustomer($event)"
+  [customer]="customer()!"
+  (onSubmit)="saveCustomer($event)"
 ></app-customer-form>

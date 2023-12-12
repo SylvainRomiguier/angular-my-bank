@@ -1,133 +1,129 @@
-import { WritableSignal, signal } from '@angular/core';
 import { Account, Customer } from '../models';
 import { CustomerService } from './Customer.abstract';
 import customersSample from './customers.sample.json';
+import { NotFoundError, DuplicateError } from '../models/errors';
 
 export class LocalStorageCustomerService implements CustomerService {
-  private customers: WritableSignal<Customer[]> = signal([]);
+customers: Customer[] = [];
 
   constructor() {
     if (localStorage.getItem('customers')) {
-      this.customers.set(JSON.parse(localStorage.getItem('customers') ?? '[]'));
+      this.customers = (JSON.parse(localStorage.getItem('customers') ?? '[]'));
     } else {
       this.loadCustomers();
     }
   }
 
   loadCustomers(): void {
-    this.customers.set([]);
+    this.customers = [];
     customersSample.forEach((customer) => {
-      this.createCustomer(
-        customer.customerId,
-        customer.firstName,
-        customer.lastName,
-        this.addressDtoToCustomerAddress(
+      this.createCustomer({
+        customerId: customer.customerId,
+        firstName: customer.firstName,
+        lastName: customer.lastName,
+        address: this.addressDtoToCustomerAddress(
           customer.address.street,
           customer.address.town,
           customer.address.zipcode
         ),
-        customer.phoneNumber,
-        customer.email,
-        new Date(customer.dateOfBirth)
-      );
+        phoneNumber: customer.phoneNumber,
+        email: customer.email,
+        dateOfBirth: new Date(customer.dateOfBirth),
+        accounts: [],
+      });
     });
   }
 
   // Get all customers
-  getCustomers(): WritableSignal<Customer[]> {
+  getCustomers(): Customer[] {
     return this.customers;
   }
 
   // Get a customer by ID
-  getCustomerById(customerId: string): Customer | undefined {
-    return this.customers().find(
+  getCustomerById(customerId: string): Customer {
+    const customer = this.customers.find(
       (customer) => customer.customerId === customerId
     );
+    if (customer) {
+      return customer;
+    }
+    throw new NotFoundError('Customer');
   }
 
   // Get a customer by ID
-  getCustomerByEmail(customerEmail: string): Customer | undefined {
-    return this.customers().find(
+  getCustomerByEmail(customerEmail: string): Customer {
+    const customer = this.customers.find(
       (customer) => customer.email === customerEmail
     );
+    if (customer) {
+      return customer;
+    }
+    throw new NotFoundError('Customer');
   }
 
   // Create a new customer
-  createCustomer(
-    customerId: string,
-    firstName: string,
-    lastName: string,
-    address: string,
-    phoneNumber: string,
-    email: string,
-    dateOfBirth: Date
-  ): void {
+  createCustomer(customer: Customer): Customer {
     const newCustomer: Customer = {
-      customerId: customerId === "to_create" ? this.generateCustomerId() : customerId,
-      firstName,
-      lastName,
-      email,
-      dateOfBirth,
-      address,
-      phoneNumber,
+      ...customer,
+      customerId:
+        customer.customerId === 'to_create'
+          ? this.generateId()
+          : customer.customerId,
       accounts: [],
     };
 
-    const customers = this.customers();
-    const existingCustomer = this.getCustomerById(newCustomer.customerId);
-    if (!existingCustomer) {
-      customers.push(newCustomer);
-      this.customers.set(customers);
-      localStorage.setItem('customers', JSON.stringify(customers));
+    try {
+    this.getCustomerById(newCustomer.customerId);
+    throw new DuplicateError('Customer');
     }
+    catch (error) {
+    if (error instanceof NotFoundError) {
+      this.customers.push(newCustomer);
+      localStorage.setItem('customers', JSON.stringify(this.customers));
+      return newCustomer;
+    }
+    throw error;
+  }
+
+    
   }
 
   // Remove a customer (if needed)
   removeCustomer(customerId: string): void {
-    const customers = this.customers().filter(
+    this.customers = this.customers.filter(
       (customer) => customer.customerId !== customerId
     );
-    this.customers.set(customers);
-    localStorage.setItem('customers', JSON.stringify(customers));
+    localStorage.setItem('customers', JSON.stringify(this.customers));
   }
 
   // Update a customer
-  updateCustomer(customer: Customer): void {
-    const customers = this.customers();
-    const customerIndex = customers.findIndex(
+  updateCustomer(customer: Customer): Customer {
+    const customerIndex = this.customers.findIndex(
       (storedCustomer) => storedCustomer.customerId === customer.customerId
     );
     if (customerIndex >= 0) {
-      customers[customerIndex] = customer;
-      this.customers.set(customers);
-      localStorage.setItem('customers', JSON.stringify(customers));
-    } else {
-      console.error('Customer not found');
+      this.customers[customerIndex] = customer;
+      localStorage.setItem('customers', JSON.stringify(this.customers));
+      return customer;
     }
+    throw new NotFoundError('Customer');
   }
 
   // Add an account to a customer
-  addAccountToCustomer(customerId: string, account: Account): void {
+  addAccountToCustomer(customerId: string, account: Account): Customer {
     const customer = this.getCustomerById(customerId);
-    if (customer) {
-      customer.accounts.push(account);
-      this.updateCustomer(customer);
-    } else {
-      console.error('Customer not found');
-    }
+    account.accountId = this.generateId();
+    customer.accounts.push(account);
+    return this.updateCustomer(customer);
   }
 
   // Remove an account from a customer
-  removeAccountFromCustomer(customerId: string, accountId: string): void {
+  removeAccountFromCustomer(customerId: string, accountId: string): Customer {
     const customer = this.getCustomerById(customerId);
-    if (customer) {
-      customer.accounts = customer.accounts.filter(
-        (account) => account.accountId !== accountId
-      );
-      this.updateCustomer(customer);
-    } else {
-      console.error('Customer not found');
-    }
+    customer.accounts = customer.accounts.filter(
+      (account) => account.accountId !== accountId
+    );
+    return this.updateCustomer(customer);
   }
 
   // example of a DTO (Data Transfer Object) conversion
@@ -140,7 +136,7 @@ export class LocalStorageCustomerService implements CustomerService {
   }
 
   // Generate a unique customer ID (simple example)
-  private generateCustomerId(): string {
+  private generateId(): string {
     return `${Math.random().toString(36).substring(2, 9)}`;
   }
 }

@@ -4,9 +4,6 @@ import { AppPageComponent } from './app.page';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AppPageComponent
-      ],
     }).compileComponents();
   });
 

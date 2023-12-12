@@ -22,6 +22,7 @@ import { ButtonDangerComponent } from 'src/app/components/molecules/button-dange
 export class CustomerFormComponent implements OnInit {
   @Input() customer?: Customer;
   @Output() onSubmit = new EventEmitter<Customer>();
+  @Output() onCancel = new EventEmitter<void>();
   private fb = inject(FormBuilder);
   customerForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -50,7 +51,7 @@ export class CustomerFormComponent implements OnInit {
     }
   }
 
-  onCancel() {
-    this.onSubmit.emit();
+  cancel() {
+    this.onCancel.emit();
   }
 }

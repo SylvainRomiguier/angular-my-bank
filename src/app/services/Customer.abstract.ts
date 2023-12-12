@@ -1,46 +1,38 @@
 import { Injectable, WritableSignal } from '@angular/core';
 import { Account, Customer } from '../models';
-import { InMemoryCustomerService } from './Customer.InMemory.service';
+import { LocalStorageCustomerService } from './Customer.LocalStorage.service';
 
 @Injectable({
   providedIn: 'root',
-  useClass: InMemoryCustomerService,
+  useClass: LocalStorageCustomerService,
 })
 export abstract class CustomerService {
   // Get all customers
-  abstract getCustomers(): WritableSignal<Customer[]>;
+  abstract getCustomers(): Customer[];
 
   // Get a customer by ID
-  abstract getCustomerById(customerId: string): Customer | undefined;
+  abstract getCustomerById(customerId: string): Customer;
 
   // Get a customer by email
-  abstract getCustomerByEmail(customerEmail: string): Customer | undefined;
+  abstract getCustomerByEmail(customerEmail: string): Customer;
 
   // Create a new customer
-  abstract createCustomer(
-    customerId: string | null,
-    firstName: string,
-    lastName: string,
-    email: string,
-    address: string,
-    phoneNumber: string,
-    dateOfBirth: Date
-  ): void;
+  abstract createCustomer(customer:Customer): Customer;
 
   // Update a customer
-  abstract updateCustomer(customer: Customer): void;
+  abstract updateCustomer(customer: Customer): Customer;
 
   // Remove a customer (if needed)
   abstract removeCustomer(customerId: string): void;
 
   // Add an account to a customer
-  abstract addAccountToCustomer(customerId: string, account: Account): void;
+  abstract addAccountToCustomer(customerId: string, account: Account): Customer;
 
   // Remove an account from a customer
   abstract removeAccountFromCustomer(
     customerId: string,
     accountId: string
-  ): void;
+  ): Customer;
 
   abstract loadCustomers(): void;
 }

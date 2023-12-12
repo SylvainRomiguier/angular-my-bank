@@ -1,7 +1,6 @@
 // customer-list.component.ts
 
-import { Component, inject } from '@angular/core';
-import { CustomerService } from '../../../../services/Customer.abstract';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CurrencyPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { CustomerComponent } from '../customer/customer.component';
 import { RouterLink } from '@angular/router';
@@ -24,24 +23,26 @@ import { Customer } from 'src/app/models';
   ],
 })
 export class CustomerListComponent {
-  customerService = inject(CustomerService);
-  customers = this.customerService.getCustomers();
+  @Input() customers: Customer[] = [];
+  @Output() onAddCustomer = new EventEmitter<Customer>();
+  @Output() onDeleteCustomer = new EventEmitter<Customer>();
+  @Output() onReloadCustomers = new EventEmitter<void>();
   edit = false;
 
   onEdit() {
     this.edit = !this.edit;
   }
 
-  onSaveCustomer(customer: Customer) {
-    this.customerService.createCustomer(
-      customer.customerId,
-      customer.firstName,
-      customer.lastName,
-      customer.address,
-      customer.phoneNumber,
-      customer.email,
-      customer.dateOfBirth
-    );
+  saveNewCustomer(customer: Customer) {
+    this.onAddCustomer.emit(customer);
     this.edit = false;
+  }
+
+  deleteCustomer(customer: Customer) {
+    this.onDeleteCustomer.emit(customer);
+  }
+
+  reloadCustomers() {
+    this.onReloadCustomers.emit();
   }
 }
