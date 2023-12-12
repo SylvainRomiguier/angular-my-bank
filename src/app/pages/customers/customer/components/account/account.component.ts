@@ -1,8 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonDangerComponent } from 'src/app/components/molecules/button-danger/button-danger.component';
 import { Account } from 'src/app/models';
-import { CustomerService } from 'src/app/services/Customer.abstract';
 
 @Component({
   selector: 'app-account',
@@ -13,8 +12,9 @@ import { CustomerService } from 'src/app/services/Customer.abstract';
 })
 export class AccountComponent {
   @Input() account!: Account;
-  private customerService = inject(CustomerService);
-  onDelete() {
-    this.customerService.removeAccountFromCustomer(this.account.customerId, this.account.accountId);
+  @Output() onDeleteAccount = new EventEmitter<Account>();
+
+  delete() {
+    this.onDeleteAccount.emit(this.account);
   }
 }
