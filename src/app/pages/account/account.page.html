@@ -1,0 +1,32 @@
+<a routerLink="/customers/{{account().customerId}}">< Customer</a>
+<h2>
+  <span class="title"
+    ><i class="fa-solid fa-money-check-dollar" style="margin-right: 1rem"></i
+    >{{account()!.accountType}} {{account()!.name}} ({{account()!.balance |
+    currency}})</span
+  ><button *ngIf="!edit" (click)="onEdit()">Edit</button>
+</h2>
+
+<app-transaction-form
+  *ngIf="!edit"
+  [account]="account()!"
+  (onSubmit)="onTransactionSubmit($event)"
+></app-transaction-form>
+
+<app-transaction-list
+  [transactions]="account()!.transactions"
+></app-transaction-list>
+
+<dialog open *ngIf="edit">
+  <article>
+    <header>
+      <span aria-label="Close" class="close" (click)="onEdit()"></span>
+      Account
+    </header>
+    <app-account-form
+      [customerId]="account()!.customerId"
+      [account]="account()!"
+      (onSubmit)="onSubmit($event)"
+      (onCancel)="onEdit()"
+    ></app-account-form>
+  </article>

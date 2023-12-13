@@ -1,5 +1,5 @@
 import { Injectable, WritableSignal } from '@angular/core';
-import { Account, Customer } from '../models';
+import { Account, Customer, TransactionType } from '../models';
 import { LocalStorageCustomerService } from './Customer.LocalStorage.service';
 
 @Injectable({
@@ -17,7 +17,7 @@ export abstract class CustomerService {
   abstract getCustomerByEmail(customerEmail: string): Customer;
 
   // Create a new customer
-  abstract createCustomer(customer:Customer): Customer;
+  abstract createCustomer(customer: Customer): Customer;
 
   // Update a customer
   abstract updateCustomer(customer: Customer): Customer;
@@ -35,4 +35,19 @@ export abstract class CustomerService {
   ): Customer;
 
   abstract loadCustomers(): void;
+
+  // Get an account by ID
+  abstract getAccountById(customerId: string, accountId: string): Account;
+
+  // Update an account
+  abstract updateAccount(customer: Customer, account: Account): void;
+
+  // Perform a transaction on the account
+  abstract performTransaction(
+    account: Account,
+    title:string,
+    date: Date,
+    type: TransactionType,
+    amount: number
+  ): Account;
 }

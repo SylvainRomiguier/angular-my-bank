@@ -9,10 +9,10 @@ export const customersRoutes: Route[] = [
         path: ':customerId',
         loadComponent: () => import('src/app/pages/customer/customer.page').then(m => m.CustomerPageComponent),
     },
-    // {
-    //     path: ':customerId/accounts/:accountId',
-    //     component: AccountDetailsComponent
-    // },
+    {
+        path: ':customerId/accounts/:accountId',
+        loadComponent: () => import('src/app/pages/account/account.page').then(m => m.AccountPageComponent),
+    },
     // {
     //     path: ':customerId/accounts/:accountId/transactions',
     //     component: TransactionListComponent

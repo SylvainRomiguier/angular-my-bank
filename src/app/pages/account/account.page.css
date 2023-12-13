@@ -1,0 +1,13 @@
+h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    flex: 1 1 300%;
+}
+
+.close {
+    cursor: pointer;
+  }

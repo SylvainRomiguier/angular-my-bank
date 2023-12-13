@@ -36,7 +36,7 @@ export class AccountFormComponent {
         ...(this.accountForm.value as unknown as Account),
         customerId: this.customerId,
         accountId: this.account?.accountId ?? "to_create",
-        balance: 0,
+        balance: this.account?.balance ?? 0,
         transactions: this.account?.transactions ?? [],
       } as Account);
     }

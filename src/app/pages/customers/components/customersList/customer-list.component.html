@@ -4,19 +4,26 @@
       ><i class="fa-regular fa-user"></i>Customers ({{
         this.customers.length
       }})</span
-    ><button *ngIf="!edit" (click)="onEdit()"><i class="fa-regular fa-add"></i></button
+    ><button *ngIf="!edit" (click)="onEdit()">
+      <i class="fa-regular fa-add"></i></button
     ><button *ngIf="!edit" (click)="reloadCustomers()">
       Reload default customers
     </button>
   </h2>
-  <div *ngIf="!edit"  class="customers-list">
+  <div *ngIf="!edit" class="customers-list">
     <div *ngFor="let customer of this.customers" class="hover-select">
       <a [routerLink]="['/customers', customer.customerId]">
-        <app-customer [customer]="customer" [small]="true" (onDeleteCustomer)="deleteCustomer($event)"></app-customer>
+        <app-customer
+          [customer]="customer"
+          [small]="true"
+          (onDeleteCustomer)="deleteCustomer($event)"
+        ></app-customer>
       </a>
     </div>
   </div>
   <app-customer-form
     *ngIf="edit"
-    (onSubmit)="saveNewCustomer($event)" (onCancel)="onEdit()"></app-customer-form>
+    (onSubmit)="saveNewCustomer($event)"
+    (onCancel)="onEdit()"
+  ></app-customer-form>
 </div>

@@ -1,8 +1,9 @@
 import { NgForOf, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Account } from 'src/app/models';
 import { AccountComponent } from '../account/account.component';
 import { AccountFormComponent } from '../account-form/account-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-list',
@@ -16,6 +17,7 @@ export class AccountListComponent {
   @Input() accounts: Account[] = [];
   @Output() onAddAccount = new EventEmitter<Account>();
   @Output() onDeleteAccount = new EventEmitter<Account>();
+  private router = inject(Router);
   edit = false;
   onClose() {
     this.edit = false;
@@ -32,5 +34,9 @@ export class AccountListComponent {
 
   onDelete(account:Account) {
     this.onDeleteAccount.emit(account);
+  }
+
+  onSelect(account:Account) {
+    this.router.navigate([`/customers/${this.customerId}/accounts/${account.accountId}`]);
   }
 }

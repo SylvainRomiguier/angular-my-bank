@@ -1,0 +1,13 @@
+article {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.title {
+    flex: 1;
+}
+
+.type {
+    flex: 0.2;
+}

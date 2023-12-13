@@ -1,0 +1,10 @@
+<article>
+  <div>
+    {{ transaction.date | date : "dd-MM-yyyy" }}
+  </div>
+  <div  class="type">{{ transaction.type }}</div>
+  <div class="title">
+  {{ transaction.title }}
+</div>
+  <div>{{ transaction.amount | currency }}</div>
+</article>

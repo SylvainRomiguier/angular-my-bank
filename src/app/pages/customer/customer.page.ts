@@ -38,14 +38,11 @@ export class CustomerPageComponent {
   edit = false;
 
   constructor() {
-    const loadedCustomer = this.customerService.getCustomerById(
-      this.customerId
-    );
-    if (!loadedCustomer) {
+    try {
+      this.customer.set(this.customerService.getCustomerById(this.customerId));
+    } catch (e) {
       this.router.navigate(['/customers']);
-      return;
     }
-    this.customer.set(loadedCustomer);
   }
 
   onEdit() {

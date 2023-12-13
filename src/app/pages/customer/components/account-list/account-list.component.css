@@ -11,3 +11,12 @@ h3 {
 .close {
   cursor: pointer;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  transition: all 0.2s ease-in-out;
+  transform: scale(1.1);
+}
