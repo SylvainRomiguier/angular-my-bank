@@ -6,6 +6,7 @@ import { CustomerFormComponent } from 'src/app/components/customer-form/customer
 import { Account, Customer } from 'src/app/models';
 import { NgIf } from '@angular/common';
 import { AccountListComponent } from './components/account-list/account-list.component';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-customer-page',
@@ -18,6 +19,7 @@ import { AccountListComponent } from './components/account-list/account-list.com
     NgIf,
     RouterLink,
     AccountListComponent,
+    SnackbarComponent
   ],
 })
 export class CustomerPageComponent {
@@ -50,9 +52,13 @@ export class CustomerPageComponent {
   }
 
   saveCustomer(customer: Customer) {
+    try {
     this.customerService.updateCustomer(customer);
     this.customer.set(customer);
     this.edit = false;
+    } catch(e) {
+      
+    }
   }
 
   addAcount(account: Account) {

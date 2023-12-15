@@ -1,11 +1,15 @@
 <main class="container">
   <div>
-   <h1>
-        <i class="fa-solid fa-building-columns" style="margin-right: 1rem"></i>
-        My Bank Ltd
-        <app-button-danger *ngIf="authService.isAuthenticated()" (click)="authService.logout()">Log out</app-button-danger>
-      </h1>
-   
+    <h1>
+      <i class="fa-solid fa-building-columns" style="margin-right: 1rem"></i>
+      My Bank Ltd
+      <app-button-danger
+        *ngIf="authService.isAuthenticated()"
+        (click)="authService.logout()"
+        >Log out</app-button-danger
+      >
+    </h1>
   </div>
   <router-outlet></router-outlet>
+  <app-snackbar [content]="notificationService.notification()"></app-snackbar>
 </main>

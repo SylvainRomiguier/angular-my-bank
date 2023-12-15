@@ -1,4 +1,4 @@
-import { Injectable, WritableSignal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Account, Customer, TransactionType } from '../models';
 import { LocalStorageCustomerService } from './Customer.LocalStorage.service';
 

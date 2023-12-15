@@ -1,0 +1,7 @@
+<div id="snackbar" [ngClass]="{
+    'show': content.message !== '',
+    'success': content.action === 'success',
+    'error': content.action === 'error',
+    'warning': content.action === 'warning',
+    'info': content.action === 'info'
+}">{{content.message}}</div>

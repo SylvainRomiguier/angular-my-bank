@@ -1,8 +1,8 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Account } from 'src/app/models';
-import { AccountComponent } from '../account/account.component';
-import { AccountFormComponent } from '../account-form/account-form.component';
+import { AccountComponent } from 'src/app/components/account/account.component';
+import { AccountFormComponent } from 'src/app/components/account-form/account-form.component';
 import { Router } from '@angular/router';
 
 @Component({

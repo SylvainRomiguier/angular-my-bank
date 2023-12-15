@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CustomerListComponent } from './components/customersList/customer-list.component';
 import { CustomerService } from 'src/app/services/Customer.abstract';
 import { Customer } from 'src/app/models';
@@ -17,22 +17,39 @@ import { Customer } from 'src/app/models';
 })
 export class CustomersPageComponent {
   customers = signal<Customer[]>([]);
+  errorMessage = signal<string>('');
   private customerService = inject(CustomerService);
 
   constructor() {
-    this.customers.set(this.customerService.getCustomers());
+    try {
+      this.customers.set(this.customerService.getCustomers());
+    } catch (error) {
+      this.errorMessage.set((error as Error).message);
+    }
   }
 
   addCustomer(customer: Customer) {
-    this.customerService.createCustomer(customer);
-    this.customers.set(this.customerService.getCustomers());
+    try {
+      this.customerService.createCustomer(customer);
+      this.customers.set(this.customerService.getCustomers());
+    } catch (error) {
+      this.errorMessage.set((error as Error).message);
+    }
   }
   deleteCustomer(customer: Customer) {
-    this.customerService.removeCustomer(customer.customerId);
-    this.customers.set(this.customerService.getCustomers());
+    try {
+      this.customerService.removeCustomer(customer.customerId);
+      this.customers.set(this.customerService.getCustomers());
+    } catch (error) {
+      this.errorMessage.set((error as Error).message);
+    }
   }
   reloadCustomers() {
-    this.customerService.loadCustomers();
-    this.customers.set(this.customerService.getCustomers());
+    try {
+      this.customerService.loadCustomers();
+      this.customers.set(this.customerService.getCustomers());
+    } catch (error) {
+      this.errorMessage.set((error as Error).message);
+    }
   }
 }
