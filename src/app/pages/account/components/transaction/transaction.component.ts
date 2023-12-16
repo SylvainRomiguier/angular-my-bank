@@ -10,5 +10,13 @@ import { Transaction } from 'src/app/models';
   imports: [DatePipe, CurrencyPipe],
 })
 export class TransactionComponent {
-  @Input() transaction!: Transaction;
+  @Input() transaction: Transaction = {
+    transactionId: '',
+    accountId: '',
+    customerId: '',
+    title: '',
+    type: 'Deposit',
+    amount: 0,
+    date: new Date(),
+  };
 }

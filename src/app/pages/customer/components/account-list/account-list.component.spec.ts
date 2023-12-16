@@ -7,9 +7,6 @@ describe('AccountListComponent', () => {
   let fixture: ComponentFixture<AccountListComponent>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [AccountListComponent]
-    });
     fixture = TestBed.createComponent(AccountListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

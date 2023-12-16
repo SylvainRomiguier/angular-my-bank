@@ -23,7 +23,16 @@ import { Customer } from 'src/app/models';
   ],
 })
 export class CustomerComponent {
-  @Input({ required: true }) customer!: Customer;
+  @Input({ required: true }) customer: Customer = {
+    customerId: '',
+    firstName: '',
+    lastName: '',
+    address: '',
+    phoneNumber: '',
+    email: '',
+    dateOfBirth: new Date(),
+    accounts: [],
+    };
   @Input() small = false;
   @Output() onDeleteCustomer = new EventEmitter<Customer>();
 

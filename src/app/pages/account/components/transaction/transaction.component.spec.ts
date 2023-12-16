@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TransactionComponent } from './transaction.component';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 describe('TransactionComponent', () => {
   let component: TransactionComponent;
@@ -8,7 +9,7 @@ describe('TransactionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TransactionComponent]
+      imports: [DatePipe, CurrencyPipe],
     });
     fixture = TestBed.createComponent(TransactionComponent);
     component = fixture.componentInstance;

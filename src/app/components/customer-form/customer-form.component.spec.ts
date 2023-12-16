@@ -7,9 +7,6 @@ describe('CustomerFormComponent', () => {
   let fixture: ComponentFixture<CustomerFormComponent>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [CustomerFormComponent]
-    });
     fixture = TestBed.createComponent(CustomerFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

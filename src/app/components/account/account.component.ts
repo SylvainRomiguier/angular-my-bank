@@ -11,7 +11,14 @@ import { Account } from 'src/app/models';
   imports: [CurrencyPipe, ButtonDangerComponent],
 })
 export class AccountComponent {
-  @Input() account!: Account;
+  @Input() account: Account = {
+    accountId: '',
+    customerId: '',
+    name: '',
+    accountType: 'Checking',
+    balance: 0,
+    transactions: [],
+  };
   @Output() onDeleteAccount = new EventEmitter<Account>();
 
   delete() {
