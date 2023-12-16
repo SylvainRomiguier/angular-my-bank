@@ -48,7 +48,10 @@ export class AccountPageComponent {
         this.customerService.getAccountById(this.customerId, this.accountId)
       );
     } catch (e) {
-      this.notificationService.notify({message: (e as Error).message, action: 'error'});
+      this.notificationService.notify({
+        message: (e as Error).message,
+        action: 'error',
+      });
       this.router.navigate([`/customers/${this.customerId}`]);
     }
   }
@@ -59,29 +62,42 @@ export class AccountPageComponent {
 
   onTransactionSubmit(transaction: Transaction) {
     try {
-    this.account.set(this.customerService.performTransaction(
-        this.account(),
-        transaction.title,
-        transaction.date,
-        transaction.type,
-        transaction.amount
-      ));  
-      this.notificationService.notify({message: 'Transaction successful', action: 'success'});
+      this.account.set(
+        this.customerService.performTransaction(
+          this.account(),
+          transaction.title,
+          transaction.date,
+          transaction.type,
+          transaction.amount
+        )
+      );
+      this.notificationService.notify({
+        message: 'Transaction successful',
+        action: 'success',
+      });
     } catch (e) {
-        this.notificationService.notify({message: (e as Error).message, action: 'error'});
+      this.notificationService.notify({
+        message: (e as Error).message,
+        action: 'error',
+      });
     }
   }
 
   onSubmit(account: Account) {
     try {
-    const customer = this.customerService.getCustomerById(this.customerId);
-    this.customerService.updateAccount(customer, account);
-    this.account.set(account);
-    this.edit = false;
-      this.notificationService.notify({message: 'Account updated', action: 'success'});
-    }catch (e) {
-        this.notificationService.notify({message: (e as Error).message, action: 'error'});
+      const customer = this.customerService.getCustomerById(this.customerId);
+      this.customerService.updateAccount(customer, account);
+      this.account.set(account);
+      this.edit = false;
+      this.notificationService.notify({
+        message: 'Account updated',
+        action: 'success',
+      });
+    } catch (e) {
+      this.notificationService.notify({
+        message: (e as Error).message,
+        action: 'error',
+      });
     }
-   
   }
 }

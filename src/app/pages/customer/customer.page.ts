@@ -7,6 +7,7 @@ import { Account, Customer } from 'src/app/models';
 import { NgIf } from '@angular/common';
 import { AccountListComponent } from './components/account-list/account-list.component';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
+import { NotificationService } from 'src/app/services/NotificationService';
 
 @Component({
   selector: 'app-customer-page',
@@ -19,7 +20,7 @@ import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.componen
     NgIf,
     RouterLink,
     AccountListComponent,
-    SnackbarComponent
+    SnackbarComponent,
   ],
 })
 export class CustomerPageComponent {
@@ -27,6 +28,7 @@ export class CustomerPageComponent {
   private customerId = this.route.snapshot.params['customerId'];
   private customerService = inject(CustomerService);
   private router = inject(Router);
+  private notificationService = inject(NotificationService);
   customer = signal<Customer>({
     customerId: '',
     firstName: '',
@@ -44,6 +46,10 @@ export class CustomerPageComponent {
       this.customer.set(this.customerService.getCustomerById(this.customerId));
     } catch (e) {
       this.router.navigate(['/customers']);
+      this.notificationService.notify({
+        message: (e as Error).message,
+        action: 'error',
+      });
     }
   }
 
@@ -53,27 +59,56 @@ export class CustomerPageComponent {
 
   saveCustomer(customer: Customer) {
     try {
-    this.customerService.updateCustomer(customer);
-    this.customer.set(customer);
-    this.edit = false;
-    } catch(e) {
-      
+      this.customerService.updateCustomer(customer);
+      this.customer.set(customer);
+      this.edit = false;
+      this.notificationService.notify({
+        message: 'Customer updated successfully',
+        action: 'success',
+      });
+    } catch (e) {
+      this.notificationService.notify({
+        message: (e as Error).message,
+        action: 'error',
+      });
     }
   }
 
   addAcount(account: Account) {
-    const updatedCustomer = this.customerService.addAccountToCustomer(
-      this.customer()!.customerId,
-      account
-    );
-    this.customer.set(updatedCustomer);
+    try {
+      const updatedCustomer = this.customerService.addAccountToCustomer(
+        this.customer()!.customerId,
+        account
+      );
+      this.customer.set(updatedCustomer);
+      this.notificationService.notify({
+        message: 'Account created successfully',
+        action: 'success',
+      });
+    } catch (e) {
+      this.notificationService.notify({
+        message: (e as Error).message,
+        action: 'error',
+      });
+    }
   }
 
   deleteAccount(account: Account) {
-    const updatedCustomer = this.customerService.removeAccountFromCustomer(
-      this.customer()!.customerId,
-      account.accountId
-    );
-    this.customer.set(updatedCustomer);
+    try {
+      const updatedCustomer = this.customerService.removeAccountFromCustomer(
+        this.customer()!.customerId,
+        account.accountId
+      );
+      this.customer.set(updatedCustomer);
+      this.notificationService.notify({
+        message: 'Account deleted successfully',
+        action: 'success',
+      });
+    } catch (e) {
+      this.notificationService.notify({
+        message: (e as Error).message,
+        action: 'error',
+      });
+    }
   }
 }

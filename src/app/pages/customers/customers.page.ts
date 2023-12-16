@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { CustomerListComponent } from './components/customersList/customer-list.component';
 import { CustomerService } from 'src/app/services/Customer.abstract';
 import { Customer } from 'src/app/models';
+import { NotificationService } from 'src/app/services/NotificationService';
 
 @Component({
   selector: 'app-customer-page',
@@ -17,14 +18,17 @@ import { Customer } from 'src/app/models';
 })
 export class CustomersPageComponent {
   customers = signal<Customer[]>([]);
-  errorMessage = signal<string>('');
   private customerService = inject(CustomerService);
+  private notificationService = inject(NotificationService);
 
   constructor() {
     try {
       this.customers.set(this.customerService.getCustomers());
     } catch (error) {
-      this.errorMessage.set((error as Error).message);
+      this.notificationService.notify({
+        message: (error as Error).message,
+        action: 'error',
+      });
     }
   }
 
@@ -32,24 +36,45 @@ export class CustomersPageComponent {
     try {
       this.customerService.createCustomer(customer);
       this.customers.set(this.customerService.getCustomers());
+      this.notificationService.notify({
+        message: 'Customer created successfully',
+        action: 'success',
+      });
     } catch (error) {
-      this.errorMessage.set((error as Error).message);
+      this.notificationService.notify({
+        message: (error as Error).message,
+        action: 'error',
+      });
     }
   }
   deleteCustomer(customer: Customer) {
     try {
       this.customerService.removeCustomer(customer.customerId);
       this.customers.set(this.customerService.getCustomers());
+      this.notificationService.notify({
+        message: 'Customer deleted successfully',
+        action: 'success',
+      });
     } catch (error) {
-      this.errorMessage.set((error as Error).message);
+      this.notificationService.notify({
+        message: (error as Error).message,
+        action: 'error',
+      });
     }
   }
   reloadCustomers() {
     try {
       this.customerService.loadCustomers();
       this.customers.set(this.customerService.getCustomers());
+      this.notificationService.notify({
+        message: 'Customers reloaded successfully',
+        action: 'success',
+      });
     } catch (error) {
-      this.errorMessage.set((error as Error).message);
+      this.notificationService.notify({
+        message: (error as Error).message,
+        action: 'error',
+      });
     }
   }
 }
