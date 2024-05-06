@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1
 
+
 FROM node:21-alpine3.18
+LABEL org.opencontainers.image.source=https://github.com/sylvainromiguier/angular-my-bank
 WORKDIR /app
 COPY . .
 RUN npm install -g @angular/cli
